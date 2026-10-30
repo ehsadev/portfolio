@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ehsadev.github.io/sitemap.xml
+Sitemap: https://ehsansaberi.is-a.dev/sitemap.xml

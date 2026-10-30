@@ -4,7 +4,7 @@
    Keep this file as the single source of portfolio content.
    ============================================================ */
 window.SITE = {
-  siteUrl: "https://ehsadev.github.io/", // used for SEO files — verify it matches your real Pages URL
+  siteUrl: "https://ehsansaberi.is-a.dev/", // used for SEO files — verify it matches your real Pages URL
   photoCutout: "assets/no-bac-profile.webp", // OPTIONAL: transparent PNG/WebP with NO background, e.g. "assets/photo-cutout.webp" → turns on the designed hero backdrop (orbits, glow disc, scan line)
   heroChips: [
     "Python",
@@ -38,6 +38,7 @@ window.SITE = {
     apidesign: { en: "API Design", fa: "طراحی API" },
     backend: { en: "Backend", fa: "بک‌اند" },
   },
+  photoCutout: "",   // OPTIONAL: transparent PNG/WebP with NO background, e.g. "assets/photo-cutout.webp" → turns on the designed hero backdrop (orbits, glow disc, scan line)
   photo: "assets/photo.webp",
   initials: { en: "ES", fa: "ES" },
 
