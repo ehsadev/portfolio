@@ -29,7 +29,8 @@ html[lang=fa]{--ff-b:"Vazirmatn","IBM Plex Sans",Tahoma,sans-serif}
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-padding-top:80px;scrollbar-gutter:stable;-webkit-text-size-adjust:100%}
 @media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
-html.lock{overflow:hidden}
+html.lock,html.nav-lock{overflow:hidden}
+@media (min-width:901px){.msheet{display:none!important}}
 body{overflow-wrap:break-word;margin:0;background:var(--bg);color:var(--text);font:400 1rem/1.7 var(--ff-b);-webkit-font-smoothing:antialiased}
 html[lang=fa] body{line-height:1.95}
 h1,h2,h3{margin:0;font-weight:600;line-height:1.15;letter-spacing:-.02em}
@@ -190,13 +191,28 @@ dialog::backdrop{background:rgba(0,0,0,.6);-webkit-backdrop-filter:blur(6px);bac
 .js .rv{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease,border-color .25s;transition-delay:var(--d,0s)}.js .rv.in{opacity:1;transform:none}
 .js .hero-in>*{animation:up .8s cubic-bezier(.2,.8,.2,1) both}.hero-in>:nth-child(2){animation-delay:.08s}.hero-in>:nth-child(3){animation-delay:.16s}.hero-in>:nth-child(4){animation-delay:.24s}.hero-in>:nth-child(5){animation-delay:.32s}.hero-in>:nth-child(6){animation-delay:.4s}.hero-in>:nth-child(7){animation-delay:.48s}
 @keyframes up{from{opacity:0;transform:translateY(20px)}}
+/* ---- cutout hero: transparent photo + designed backdrop (enabled by photoCutout in data.js) ---- */
+.core{display:none}
+.stage.cut{overflow:hidden;overflow:clip;width:min(100%,460px);padding:0;aspect-ratio:1/1.12;display:flex;align-items:flex-end;justify-content:center}
+.stage.cut .net{opacity:.5}
+.stage.cut .core{display:block;position:absolute;inset-inline:7%;bottom:3%;aspect-ratio:1;z-index:0}
+.stage.cut .disc{position:absolute;inset:13%;border-radius:50%;border:1.5px solid var(--a);background:radial-gradient(circle at 50% 30%,var(--glow),transparent 62%),linear-gradient(160deg,color-mix(in srgb,var(--a) 22%,transparent),color-mix(in srgb,var(--b) 26%,transparent))}
+.stage.cut .orbit{position:absolute;border-radius:50%;border:1px dashed var(--a);opacity:.65;animation:spin 26s linear infinite}
+.stage.cut .o1{inset:3%}.stage.cut .o2{inset:-7%;border-color:var(--b);animation-duration:38s;animation-direction:reverse}
+.sat{position:absolute;top:-5px;left:50%;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:var(--a);box-shadow:0 0 14px 2px var(--a)}.o2 .sat{background:var(--b);box-shadow:0 0 14px 2px var(--b);top:auto;bottom:-5px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.stage.cut::after{content:"";position:absolute;z-index:1;left:12%;right:12%;bottom:-2%;height:9%;background:radial-gradient(ellipse at center,var(--a),transparent 70%);opacity:.35}
+.stage.cut .frame{position:relative;z-index:2;width:100%;height:100%;aspect-ratio:auto;border:0;border-radius:0;background:none;box-shadow:none;overflow:visible;display:flex;align-items:flex-end;justify-content:center}
+.stage.cut .frame img{width:auto;max-width:92%;height:100%;object-fit:contain;object-position:bottom;filter:drop-shadow(0 14px 22px rgba(0,0,0,.24));-webkit-mask-image:linear-gradient(180deg,#000 90%,transparent);mask-image:linear-gradient(180deg,#000 90%,transparent)}
+.stage.cut .ph{inset:auto 0 12% 0;height:50%;opacity:.35;z-index:0}
+.stage.cut .c1{top:12%}.stage.cut .c2{top:46%;inset-inline-end:0}.stage.cut .c3{bottom:20%;inset-inline-start:0}.stage.cut .c4{bottom:4%}
 @media (max-width:900px){.hero,.about,.cbox{grid-template-columns:minmax(0,1fr)}.stage{order:-1;width:min(100%,280px);padding:30px 26px}.composer{border-inline-start:0;border-top:1px solid var(--line)}
 .ibtn.menu-btn{display:inline-flex}.hbar{gap:6px}
-#site-nav{display:none;position:absolute;top:100%;inset-inline:0;background:var(--bg);border-bottom:1px solid var(--line);box-shadow:0 24px 40px -24px rgba(0,0,0,.45);padding:6px clamp(18px,5vw,40px) 14px;max-height:calc(100dvh - 64px);overflow-y:auto}
-#site-nav.open{display:block}
-.nav{flex-direction:column;gap:0;overflow:visible;-webkit-mask-image:none;mask-image:none}
-.nav a{padding:14px 6px;border-radius:0;border-bottom:1px solid var(--line);font-size:1.05rem;color:var(--text)}.nav li:last-child a{border-bottom:0}
-.nav a[aria-current]{background:none;color:var(--a)}}
+#site-nav{display:none}
+.msheet{display:none;position:fixed;inset-inline:0;top:var(--hh,61px);bottom:0;z-index:49;background:var(--bg);overflow-y:auto;overscroll-behavior:contain;padding:6px clamp(18px,5vw,40px) 40px;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+.msheet.is-open{display:block}.msheet ul{list-style:none;margin:0;padding:0}
+.msheet a{display:flex;align-items:center;gap:16px;min-height:58px;padding:12px 6px;border-bottom:1px solid var(--line);text-decoration:none;color:var(--text);font-size:1.15rem;font-weight:500;touch-action:manipulation}
+.msheet a .mono{color:var(--a);font-size:.8rem;min-width:2.2ch}.msheet a[aria-current]{color:var(--a)}}
 @media (max-width:760px){.agrid{grid-template-columns:1fr}.bn{display:none}.rule{display:none}.sec{padding-top:44px}}
 @media (max-width:560px){.cta .btn{flex:1 1 auto;justify-content:center}.term pre{font-size:.72rem;padding:14px}.job{padding:18px 18px}.cleft,.fbody{padding:22px 18px}.q{padding:22px 18px 18px}.dpad{padding:18px}.fwrap{flex-direction:column;align-items:flex-start}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.js .rv{opacity:1;transform:none}.l{opacity:1}}
@@ -210,8 +226,9 @@ dialog::backdrop{background:rgba(0,0,0,.6);-webkit-backdrop-filter:blur(6px);bac
   <nav id="site-nav" aria-label="Main"><ul class="nav" id="menu"></ul></nav>
   <button class="ibtn" id="lang-btn" type="button" aria-label="Switch language"><svg class="si" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.7 3.9 5.7 3.9 9s-1.3 6.3-3.9 9c-2.6-2.7-3.9-5.7-3.9-9S9.4 5.7 12 3z"/></svg><span id="lang-lbl" lang="fa">فا</span></button>
   <button class="ibtn" id="theme-btn" type="button" aria-pressed="false" aria-label="Dark mode"><svg class="si" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 0 0 16z" fill="currentColor"/></svg></button>
-  <button class="ibtn menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu"><svg class="si" viewBox="0 0 24 24" aria-hidden="true"><path class="mo" d="M4 8h16M4 16h16"/><path class="mc" d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <button class="ibtn menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu"><svg class="si" viewBox="0 0 24 24" aria-hidden="true"><path class="mo" d="M4 8h16M4 16h16"/><path class="mc" d="M6 6l12 12M18 6L6 18"/></svg></button>
 </div></header>
+<nav class="msheet" id="mobile-nav" aria-label="Main"><ul id="mmenu"></ul></nav>
 
 <main id="main">
   <section class="wrap hero" id="top">
@@ -230,6 +247,7 @@ dialog::backdrop{background:rgba(0,0,0,.6);-webkit-backdrop-filter:blur(6px);bac
     </div>
     <div class="stage" aria-hidden="false">
       <svg class="net" id="net" aria-hidden="true" focusable="false"></svg>
+      <div class="core" aria-hidden="true"><i class="orbit o1"><b class="sat"></b></i><i class="orbit o2"><b class="sat"></b></i><i class="disc"></i></div>
       <div class="frame"><span class="ph" aria-hidden="true">ES</span><img id="photo" src="assets/photo.webp" alt="Ehsan Saberi" width="480" height="600" fetchpriority="high" decoding="async" onerror="this.hidden=true"></div>
       <div id="chips" aria-hidden="true"></div>
     </div>
@@ -241,7 +259,7 @@ dialog::backdrop{background:rgba(0,0,0,.6);-webkit-backdrop-filter:blur(6px);bac
 <dialog id="dlg" aria-labelledby="dlg-title"><button class="ibtn dclose" type="button" data-close aria-label="Close">×</button><div id="dlg-body"></div></dialog>
 <a class="totop" id="top-btn" href="#top" aria-label="Back to top"><svg class="si" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg></a>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-<script src="js/data.js?v=8" defer></script>
-<script src="js/app.js?v=8" defer></script>
+<script src="js/data.js?v=14" defer></script>
+<script src="js/app.js?v=14" defer></script>
 </body>
 </html>

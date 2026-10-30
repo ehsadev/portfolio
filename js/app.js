@@ -62,7 +62,9 @@
     var so2 = $("#soc"), ch2 = $("#chips"); if (!so2 || !ch2) return;
     so2.innerHTML = (S.links || []).map(function (l) { return '<a href="' + url(l.url) + '" target="_blank" rel="noopener noreferrer" aria-label="' + esc(l.label) + '" title="' + esc(l.label) + '">' + ic(l.icon) + "</a>"; }).join("");
     chips(ch2);
-    var ph = $("#photo"); if (ph) { if (S.photo && ph.getAttribute("src") !== S.photo) ph.src = S.photo; ph.alt = T("name"); }
+    var ph = $("#photo"), st = $(".stage"), src = S.photoCutout || S.photo;
+    if (st) st.classList.toggle("cut", !!S.photoCutout);
+    if (ph) { if (src && ph.getAttribute("src") !== src) { ph.hidden = false; ph.src = src; } ph.alt = T("name"); }
     var r = S.roles || [], ro = $("#role"); if (ro) ro.textContent = L(r[0]);
   }
 
@@ -110,6 +112,7 @@
 
     $("#sections").innerHTML = h;
     $("#menu").innerHTML = secs.map(function (s) { return '<li><a href="#' + s[0] + '">' + esc(s[1]) + "</a></li>"; }).join("");
+    $("#mmenu").innerHTML = secs.map(function (s, i) { return '<li><a href="#' + s[0] + '"><span class="mono">' + (i < 9 ? nf(0) : "") + nf(i + 1) + "</span>" + esc(s[1]) + "</a></li>"; }).join("");
     $("#foot").innerHTML = '<div class="wrap fwrap"><span>© ' + nf(new Date().getFullYear()) + " " + esc(T("name")) + '</span><ul class="flinks">' + (S.links || []).map(function (l) { return '<li><a href="' + url(l.url) + '" target="_blank" rel="noopener noreferrer">' + ic(l.icon) + esc(l.label) + "</a></li>"; }).join("") + '</ul><a href="#top">' + esc(T("back")) + "</a></div>";
     var f = $("#msg-form"); if (f) f.addEventListener("submit", function (e) {
       e.preventDefault(); var n2 = f.elements.sender.value.trim(), m = f.elements.message.value.trim(), er = $("#f-err");
@@ -209,11 +212,14 @@
   }
   function observeNav() {
     if (!("IntersectionObserver" in window)) return; if (so) so.disconnect();
-    var links = $$("#menu a"); so = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) links.forEach(function (a) { if (a.getAttribute("href") === "#" + e.target.id) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current"); }); }); }, { rootMargin: "-45% 0px -50% 0px" });
+    var links = $$("#menu a, #mmenu a"); so = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) links.forEach(function (a) { if (a.getAttribute("href") === "#" + e.target.id) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current"); }); }); }, { rootMargin: "-45% 0px -50% 0px" });
     $$("main section[id]").forEach(function (s) { so.observe(s); });
   }
-  function setMenu(o) { var n = $("#site-nav"), b = $("#menu-btn"); n.classList.toggle("open", o); b.setAttribute("aria-expanded", String(o)); }
-  doc.addEventListener("keydown", function (e) { if (e.key === "Escape" && $("#site-nav").classList.contains("open")) { setMenu(false); $("#menu-btn").focus(); } });
+  function setMenu(o) {
+    var n = $("#mobile-nav"), b = $("#menu-btn"); if (o) n.style.setProperty("--hh", $(".hd").offsetHeight + "px");
+    n.classList.toggle("is-open", o); root.classList.toggle("nav-lock", o); b.setAttribute("aria-expanded", String(o));
+  }
+  doc.addEventListener("keydown", function (e) { if (e.key === "Escape" && $("#mobile-nav").classList.contains("is-open")) { setMenu(false); $("#menu-btn").focus(); } });
   addEventListener("resize", function () { if (innerWidth > 900) setMenu(false); });
   function toast(m) { var t = $("#toast"); t.textContent = m; t.classList.add("show"); clearTimeout(toast.t); toast.t = setTimeout(function () { t.classList.remove("show"); }, 2200); }
   function copy(x) { if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(x); return new Promise(function (ok, no) { var a = doc.createElement("textarea"); a.value = x; a.style.cssText = "position:fixed;opacity:0"; doc.body.appendChild(a); a.select(); try { doc.execCommand("copy") ? ok() : no(); } catch (e) { no(e); } a.remove(); }); }
@@ -221,9 +227,9 @@
   /* ---------- events: delegated; nothing here ever moves the scroll position ---------- */
   var dlg = $("#dlg");
   doc.addEventListener("click", function (e) {
-    if (!e.target.closest("#site-nav,#menu-btn")) setMenu(false); else if (e.target.closest("#site-nav a")) setMenu(false);
+    if (!e.target.closest("#mobile-nav,#menu-btn")) setMenu(false); else if (e.target.closest("#mobile-nav a")) setMenu(false); /* sync: class removed before the browser follows the link */
     var t = e.target.closest ? e.target.closest("button") : null; if (!t) return;
-    if (t.id === "menu-btn") { setMenu(!$("#site-nav").classList.contains("open")); return; }
+    if (t.id === "menu-btn") { setMenu(!$("#mobile-nav").classList.contains("is-open")); return; }
     if (t.id === "lang-btn") { lang = lang === "fa" ? "en" : "fa"; applyLang(); }
     else if (t.id === "theme-btn") { var n = curTheme() === "dark" ? "light" : "dark"; root.dataset.theme = n; store.set("theme", n); syncTheme(); }
     else if (t.hasAttribute("data-copy")) copy(S.email).then(function () { toast(T("copied")); }, function () { toast(T("copyFail")); });
