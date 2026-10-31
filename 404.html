@@ -59,8 +59,8 @@
           "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
           "Helvetica Neue", Arial, sans-serif;
         --font-mono:
-          "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-          "Liberation Mono", "Courier New", monospace;
+          "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
+          Consolas, "Liberation Mono", "Courier New", monospace;
 
         --max: 1120px;
         --radius: 10px;
@@ -186,9 +186,21 @@
         position: absolute;
         inset: 0;
         background-image:
-          radial-gradient(circle, rgba(167, 243, 208, 0.5) 0.5px, transparent 1px),
-          radial-gradient(circle, rgba(134, 239, 172, 0.35) 0.5px, transparent 1px),
-          radial-gradient(circle, rgba(228, 235, 231, 0.25) 0.5px, transparent 1px);
+          radial-gradient(
+            circle,
+            rgba(167, 243, 208, 0.5) 0.5px,
+            transparent 1px
+          ),
+          radial-gradient(
+            circle,
+            rgba(134, 239, 172, 0.35) 0.5px,
+            transparent 1px
+          ),
+          radial-gradient(
+            circle,
+            rgba(228, 235, 231, 0.25) 0.5px,
+            transparent 1px
+          );
         background-size:
           180px 180px,
           240px 240px,
@@ -667,7 +679,11 @@
       .terminal {
         width: 100%;
         max-width: 720px;
-        background: linear-gradient(180deg, var(--surface) 0%, var(--bg-2) 100%);
+        background: linear-gradient(
+          180deg,
+          var(--surface) 0%,
+          var(--bg-2) 100%
+        );
         border: 1px solid var(--border);
         border-radius: var(--radius);
         text-align: left;
@@ -1037,11 +1053,22 @@
       <header class="nav" role="banner">
         <a href="/" class="brand" aria-label="Ehsan Saberi — Home">
           <span class="brand-mark" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+            >
               <path d="M4 7h16" />
               <path d="M4 12h10" />
               <path d="M4 17h16" />
-              <circle cx="18" cy="12" r="1.2" fill="currentColor" stroke="none" />
+              <circle
+                cx="18"
+                cy="12"
+                r="1.2"
+                fill="currentColor"
+                stroke="none"
+              />
             </svg>
           </span>
           <span class="brand-name">
@@ -1104,7 +1131,7 @@
               <path d="M13 6l6 6-6 6" />
             </svg>
           </a>
-          <a href="/projects" class="btn btn-secondary">
+          <a href="/#projects" class="btn btn-secondary">
             View Projects
             <svg
               viewBox="0 0 24 24"
@@ -1136,32 +1163,73 @@
 
     <script>
       (function () {
-        var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        var reduced = window.matchMedia(
+          "(prefers-reduced-motion: reduce)",
+        ).matches;
 
         /* ---------- Terminal trace ---------- */
         var terminal = document.getElementById("terminal");
         var lines = [
-          { html: '<span class="prompt">$</span> <span class="cmd">system.trace --route=/this-route-does-not-exist</span>' },
-          { html: '<span class="muted">→ resolving route against registry…</span>' },
-          { html: '<span class="tag-err">[ERR]</span> <span class="muted">route_not_found</span> <span class="muted">· inference_failed · endpoint unavailable</span>' },
-          { html: '<span class="divider">────────────────────────────────────────────────</span>' },
-          { html: '<span class="key">route      </span> <span class="muted">:</span> <span class="val">/this-route-does-not-exist</span>' },
-          { html: '<span class="key">method     </span> <span class="muted">:</span> <span class="val">GET</span>' },
-          { html: '<span class="key">status     </span> <span class="muted">:</span> <span class="tag-err">404</span>' },
-          { html: '<span class="key">timestamp  </span> <span class="muted">:</span> <span class="val">' + new Date().toISOString() + '</span>' },
-          { html: '<span class="key">request_id </span> <span class="muted">:</span> <span class="val">req_' + randHex(12) + '</span>' },
-          { html: '<span class="divider">────────────────────────────────────────────────</span>' },
+          {
+            html: '<span class="prompt">$</span> <span class="cmd">system.trace --route=/this-route-does-not-exist</span>',
+          },
+          {
+            html: '<span class="muted">→ resolving route against registry…</span>',
+          },
+          {
+            html: '<span class="tag-err">[ERR]</span> <span class="muted">route_not_found</span> <span class="muted">· inference_failed · endpoint unavailable</span>',
+          },
+          {
+            html: '<span class="divider">────────────────────────────────────────────────</span>',
+          },
+          {
+            html: '<span class="key">route      </span> <span class="muted">:</span> <span class="val">/this-route-does-not-exist</span>',
+          },
+          {
+            html: '<span class="key">method     </span> <span class="muted">:</span> <span class="val">GET</span>',
+          },
+          {
+            html: '<span class="key">status     </span> <span class="muted">:</span> <span class="tag-err">404</span>',
+          },
+          {
+            html:
+              '<span class="key">timestamp  </span> <span class="muted">:</span> <span class="val">' +
+              new Date().toISOString() +
+              "</span>",
+          },
+          {
+            html:
+              '<span class="key">request_id </span> <span class="muted">:</span> <span class="val">req_' +
+              randHex(12) +
+              "</span>",
+          },
+          {
+            html: '<span class="divider">────────────────────────────────────────────────</span>',
+          },
           { html: '<span class="muted">&gt; reasoning…</span>' },
-          { html: '<span class="reasoning"><span class="bullet">·</span> no matching route found in registry</span>' },
-          { html: '<span class="reasoning"><span class="bullet">·</span> RAG retrieval returned 0 candidates</span>' },
-          { html: '<span class="reasoning"><span class="bullet">·</span> agent fallback exhausted — no rewrite possible</span>' },
-          { html: '<span class="muted">&gt; confidence:</span> <span class="tag-err">0.00</span>' },
-          { html: '<span class="divider">────────────────────────────────────────────────</span>' },
-          { html: '<span class="tag-ok">[SYSTEM]</span> <span class="muted">awaiting new instruction</span><span class="cursor" aria-hidden="true"></span>' }
+          {
+            html: '<span class="reasoning"><span class="bullet">·</span> no matching route found in registry</span>',
+          },
+          {
+            html: '<span class="reasoning"><span class="bullet">·</span> RAG retrieval returned 0 candidates</span>',
+          },
+          {
+            html: '<span class="reasoning"><span class="bullet">·</span> agent fallback exhausted — no rewrite possible</span>',
+          },
+          {
+            html: '<span class="muted">&gt; confidence:</span> <span class="tag-err">0.00</span>',
+          },
+          {
+            html: '<span class="divider">────────────────────────────────────────────────</span>',
+          },
+          {
+            html: '<span class="tag-ok">[SYSTEM]</span> <span class="muted">awaiting new instruction</span><span class="cursor" aria-hidden="true"></span>',
+          },
         ];
 
         function randHex(n) {
-          var s = "", c = "0123456789abcdef";
+          var s = "",
+            c = "0123456789abcdef";
           for (var i = 0; i < n; i++) s += c[Math.floor(Math.random() * 16)];
           return s;
         }
@@ -1169,7 +1237,8 @@
         var traceEl = document.getElementById("trace");
         var latencyEl = document.getElementById("latency");
         if (traceEl) traceEl.textContent = "req_" + randHex(12);
-        if (latencyEl) latencyEl.textContent = (Math.floor(Math.random() * 60) + 18) + "ms";
+        if (latencyEl)
+          latencyEl.textContent = Math.floor(Math.random() * 60) + 18 + "ms";
 
         if (reduced) {
           lines.forEach(function (l) {
@@ -1201,30 +1270,63 @@
         // Abstract marks — each a unique glyph representing an AI system
         // Rendered as simple SVG strokes in the mint palette
         var entities = [
-          { name: "openai",     mark: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3l7.8 4.5v9L12 21l-7.8-4.5v-9L12 3z"/><path d="M12 3v18M4.2 7.5l15.6 9M19.8 7.5l-15.6 9"/></svg>' },
-          { name: "claude",     mark: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3l2.4 6.6H21l-5.4 4 2 6.6L12 16.4l-5.6 3.8 2-6.6-5.4-4h6.6L12 3z"/></svg>' },
-          { name: "qwen",       mark: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="11" cy="11" r="7"/><path d="M16 16l5 5"/></svg>' },
-          { name: "deepseek",   mark: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 12c0-5 4-8 8-8s8 3 8 8-4 8-8 8"/><path d="M4 12h16"/><circle cx="12" cy="12" r="2"/></svg>' },
-          { name: "grok",       mark: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M5 5l14 14M19 5L5 19"/><circle cx="12" cy="12" r="3"/></svg>' },
-          { name: "gemini",     mark: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3l3 6 6 1-4.5 4 1 6-5.5-3-5.5 3 1-6L3 10l6-1 3-6z"/></svg>' },
-          { name: "meta",       mark: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 12c0-3 2-5 4-5s4 2 4 5-2 5-4 5-4-2-4-5zM12 12c0-3 2-5 4-5s4 2 4 5-2 5-4 5-4-2-4-5z"/></svg>' },
-          { name: "mistral",    mark: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 7h14M3 12h18M3 17h10"/></svg>' },
-          { name: "copilot",    mark: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8 6l-5 6 5 6M16 6l5 6-5 6"/></svg>' },
-          { name: "perplexity", mark: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M7 8h6a4 4 0 010 8h-3M10 16v5"/><circle cx="10" cy="19" r="0.5" fill="currentColor"/></svg>' }
+          {
+            name: "openai",
+            mark: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3l7.8 4.5v9L12 21l-7.8-4.5v-9L12 3z"/><path d="M12 3v18M4.2 7.5l15.6 9M19.8 7.5l-15.6 9"/></svg>',
+          },
+          {
+            name: "claude",
+            mark: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3l2.4 6.6H21l-5.4 4 2 6.6L12 16.4l-5.6 3.8 2-6.6-5.4-4h6.6L12 3z"/></svg>',
+          },
+          {
+            name: "qwen",
+            mark: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="11" cy="11" r="7"/><path d="M16 16l5 5"/></svg>',
+          },
+          {
+            name: "deepseek",
+            mark: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 12c0-5 4-8 8-8s8 3 8 8-4 8-8 8"/><path d="M4 12h16"/><circle cx="12" cy="12" r="2"/></svg>',
+          },
+          {
+            name: "grok",
+            mark: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M5 5l14 14M19 5L5 19"/><circle cx="12" cy="12" r="3"/></svg>',
+          },
+          {
+            name: "gemini",
+            mark: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3l3 6 6 1-4.5 4 1 6-5.5-3-5.5 3 1-6L3 10l6-1 3-6z"/></svg>',
+          },
+          {
+            name: "meta",
+            mark: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 12c0-3 2-5 4-5s4 2 4 5-2 5-4 5-4-2-4-5zM12 12c0-3 2-5 4-5s4 2 4 5-2 5-4 5-4-2-4-5z"/></svg>',
+          },
+          {
+            name: "mistral",
+            mark: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 7h14M3 12h18M3 17h10"/></svg>',
+          },
+          {
+            name: "copilot",
+            mark: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8 6l-5 6 5 6M16 6l5 6-5 6"/></svg>',
+          },
+          {
+            name: "perplexity",
+            mark: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M7 8h6a4 4 0 010 8h-3M10 16v5"/><circle cx="10" cy="19" r="0.5" fill="currentColor"/></svg>',
+          },
         ];
 
         // Messages each entity can say
         var messages = {
-          openai:     ["Page not found.", "That route doesn't exist."],
-          claude:     ["I couldn't find that route.", "No match in the index."],
-          qwen:       ["404. This path doesn't exist.", "Route unresolved."],
-          deepseek:   ["Searching... nothing here.", "Deep search returned 0."],
-          grok:       ["Well... that's a 404.", "Yeah, that's not a thing."],
-          gemini:     ["This page seems to be missing.", "Two models, zero results."],
-          mistral:    ["Route not found.", "Le vent a emporté la page."],
-          copilot:    ["I can't help with this one.", "No suggestion available."],
+          openai: ["Page not found.", "That route doesn't exist."],
+          claude: ["I couldn't find that route.", "No match in the index."],
+          qwen: ["404. This path doesn't exist.", "Route unresolved."],
+          deepseek: ["Searching... nothing here.", "Deep search returned 0."],
+          grok: ["Well... that's a 404.", "Yeah, that's not a thing."],
+          gemini: [
+            "This page seems to be missing.",
+            "Two models, zero results.",
+          ],
+          mistral: ["Route not found.", "Le vent a emporté la page."],
+          copilot: ["I can't help with this one.", "No suggestion available."],
           perplexity: ["I searched. No matching page.", "Zero sources found."],
-          meta:       ["Endpoint unreachable.", "Not in the graph."]
+          meta: ["Endpoint unreachable.", "Not in the graph."],
         };
 
         var ecosystem = document.getElementById("ecosystem");
@@ -1238,7 +1340,7 @@
         var entityEls = [];
         for (var k = 0; k < count; k++) {
           var e = entities[k % entities.length];
-          var depth = k % 3 === 0 ? "near" : (k % 3 === 1 ? "mid" : "far");
+          var depth = k % 3 === 0 ? "near" : k % 3 === 1 ? "mid" : "far";
           var el = document.createElement("div");
           el.className = "entity";
           el.setAttribute("data-depth", depth);
@@ -1259,15 +1361,18 @@
           var swayDur = 10 + Math.random() * 10;
           el.style.setProperty("--drift-duration", dur + "s");
           el.style.setProperty("--sway-duration", swayDur + "s");
-          el.style.setProperty("--drift-delay", (-Math.random() * dur) + "s");
-          el.style.setProperty("--sway-delay", (-Math.random() * swayDur) + "s");
-          el.style.setProperty("--dx1", (Math.random() * 40 - 20) + "px");
-          el.style.setProperty("--dy1", (-20 - Math.random() * 30) + "px");
-          el.style.setProperty("--dx2", (Math.random() * 40 - 20) + "px");
-          el.style.setProperty("--dy2", (-40 - Math.random() * 40) + "px");
-          el.style.setProperty("--dx3", (Math.random() * 30 - 15) + "px");
-          el.style.setProperty("--dy3", (-15 - Math.random() * 25) + "px");
-          el.style.setProperty("--sway-amount", (Math.random() > 0.5 ? "" : "-") + (4 + Math.random() * 6) + "deg");
+          el.style.setProperty("--drift-delay", -Math.random() * dur + "s");
+          el.style.setProperty("--sway-delay", -Math.random() * swayDur + "s");
+          el.style.setProperty("--dx1", Math.random() * 40 - 20 + "px");
+          el.style.setProperty("--dy1", -20 - Math.random() * 30 + "px");
+          el.style.setProperty("--dx2", Math.random() * 40 - 20 + "px");
+          el.style.setProperty("--dy2", -40 - Math.random() * 40 + "px");
+          el.style.setProperty("--dx3", Math.random() * 30 - 15 + "px");
+          el.style.setProperty("--dy3", -15 - Math.random() * 25 + "px");
+          el.style.setProperty(
+            "--sway-amount",
+            (Math.random() > 0.5 ? "" : "-") + (4 + Math.random() * 6) + "deg",
+          );
 
           var core = document.createElement("div");
           core.className = "entity-core";
@@ -1276,7 +1381,10 @@
 
           var bubble = document.createElement("div");
           bubble.className = "bubble-msg";
-          bubble.innerHTML = '<span class="speaker">' + e.name + '</span><span class="text"></span>';
+          bubble.innerHTML =
+            '<span class="speaker">' +
+            e.name +
+            '</span><span class="text"></span>';
           el.appendChild(bubble);
 
           ecosystem.appendChild(el);
@@ -1290,13 +1398,13 @@
           var bub = document.createElement("div");
           bub.className = "bubble";
           bub.style.left = Math.random() * 100 + "%";
-          bub.style.setProperty("--drift", (Math.random() * 60 - 30) + "px");
+          bub.style.setProperty("--drift", Math.random() * 60 - 30 + "px");
           var size = 2 + Math.random() * 4;
           bub.style.width = size + "px";
           bub.style.height = size + "px";
           var dur2 = 18 + Math.random() * 22;
           bub.style.animationDuration = dur2 + "s";
-          bub.style.animationDelay = (-Math.random() * dur2) + "s";
+          bub.style.animationDelay = -Math.random() * dur2 + "s";
           bubblesContainer.appendChild(bub);
         }
 
