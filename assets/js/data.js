@@ -37,8 +37,8 @@ window.SITE = {
     apidesign: { en: "API Design", fa: "طراحی API" },
     backend: { en: "Backend", fa: "بک‌اند" },
   },
-  photo: "assets/photo.webp",
-  photoCutout: "assets/photo-cutout.webp", // OPTIONAL: transparent PNG/WebP with NO background, e.g. "assets/photo-cutout.webp" → turns on the designed hero backdrop (orbits, glow disc, scan line)
+  photo: "assets/images/photo.webp",
+  photoCutout: "assets/images/photo-cutout.webp", // OPTIONAL: transparent PNG/WebP with NO background, e.g. "assets/photo-cutout.webp" → turns on the designed hero backdrop (orbits, glow disc, scan line)
   initials: { en: "ES", fa: "ES" },
 
   roles: [
