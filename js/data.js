@@ -5,7 +5,6 @@
    ============================================================ */
 window.SITE = {
   siteUrl: "https://ehsansaberi.is-a.dev/", // used for SEO files — verify it matches your real Pages URL
-  photoCutout: "assets/no-bac-profile.webp", // OPTIONAL: transparent PNG/WebP with NO background, e.g. "assets/photo-cutout.webp" → turns on the designed hero backdrop (orbits, glow disc, scan line)
   heroChips: [
     "Python",
     "FastAPI",
@@ -39,6 +38,7 @@ window.SITE = {
     backend: { en: "Backend", fa: "بک‌اند" },
   },
   photo: "assets/photo.webp",
+  photoCutout: "assets/photo-cutout.webp", // OPTIONAL: transparent PNG/WebP with NO background, e.g. "assets/photo-cutout.webp" → turns on the designed hero backdrop (orbits, glow disc, scan line)
   initials: { en: "ES", fa: "ES" },
 
   roles: [
