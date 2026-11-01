@@ -1,3 +1,4 @@
+/* 404 page logic: language/theme, did-you-mean, terminal, neural net, 3D logo orbs + chat bubbles */
 (function () {
   var D = document,
     R = D.documentElement,
@@ -16,7 +17,7 @@
     set: function (k, v) {
       try {
         localStorage.setItem(k, v);
-      } catch (e) {}
+      } catch (e) { }
     },
   };
   var lang = store.get("lang") === "fa" ? "fa" : "en";
@@ -180,11 +181,7 @@
     return 1 - lev(slug, id) / Math.max(slug.length, id.length);
   }
   var ranked = S.map(function (s) {
-    return {
-      id: s[0],
-      n: s[1],
-      s: Math.max(0, Math.min(0.99, score(s[0]))),
-    };
+    return { id: s[0], n: s[1], s: Math.max(0, Math.min(0.99, score(s[0]))) };
   }).sort(function (a, b) {
     return b.s - a.s;
   });
@@ -228,8 +225,8 @@
       p.appendChild(s);
     }
     var tag = function (c, t) {
-        return el("b", c, t);
-      },
+      return el("b", c, t);
+    },
       cut = function (s, n) {
         return s.length > n ? s.slice(0, n - 1) + "…" : s;
       };
@@ -274,15 +271,15 @@
       pts[i].forEach(function (p, j) {
         pts[i + 1].forEach(function (q, m) {
           var c =
-              'x1="' +
-              p[0] +
-              '" y1="' +
-              p[1] +
-              '" x2="' +
-              q[0] +
-              '" y2="' +
-              q[1] +
-              '"',
+            'x1="' +
+            p[0] +
+            '" y1="' +
+            p[1] +
+            '" x2="' +
+            q[0] +
+            '" y2="' +
+            q[1] +
+            '"',
             d = (i === MI && j === MJ) || (i + 1 === MI && m === MJ);
           h += "<line " + (d ? 'class="dead" ' : "") + c + "/>";
           if (!d && k++ % 5 === 0)
