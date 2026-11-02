@@ -454,16 +454,29 @@ html[dir="rtl"] .bub {
 html[lang="fa"] .who {
   letter-spacing: 0;
 }
+#txt {
+  display: block;
+  position: relative;
+}
+/* the bubble is always sized by the FULL text (invisible .sz); the typed text (.ty) is laid over it, so the box can never be too small */
+.sz {
+  display: block;
+  visibility: hidden;
+}
+.ty {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
 .dots {
   display: none;
+  position: absolute;
+  top: 0.62em;
+  inset-inline-start: 0;
   gap: 4px;
-  padding: 7px 0 2px;
 }
 .bub.typing .dots {
   display: inline-flex;
-}
-.bub.typing #txt {
-  display: none;
 }
 .dots u {
   width: 6px;
